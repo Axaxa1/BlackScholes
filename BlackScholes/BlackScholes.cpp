@@ -5,17 +5,24 @@
 #include "BlackScholesModel.h"
 #include "MonteCarloPricer.h"
 #include "European.h"
+#include "Digital.h"
 
 int main()
 {
     BlackScholesModel model = BlackScholesModel(100, 0.05, 0.02); // Model to simulate prices
-    EuropeanCall call = EuropeanCall(100.0, 1.0); // European Call option
-    EuropeanPut put = EuropeanPut(110.0, 1.0);
     MonteCarloPricer optimizer = MonteCarloPricer(1000); // Optimizer 
 
-   
+    EuropeanCall call = EuropeanCall(100.0, 1.0); // European Call option
+    EuropeanPut put = EuropeanPut(110.0, 1.0); // European put
     optimizer.priceAndPrint(model, call);
     optimizer.priceAndPrint(model, put);
+
+    DigitalCall digi_call = DigitalCall(100.0, 1.0);
+    DigitalPut digi_put = DigitalPut(100.0, 1.0);
+    optimizer.priceAndPrint(model, digi_call);
+    optimizer.priceAndPrint(model, digi_put);
+
+
 }
 
 // Exécuter le programme : Ctrl+F5 ou menu Déboguer > Exécuter sans débogage
