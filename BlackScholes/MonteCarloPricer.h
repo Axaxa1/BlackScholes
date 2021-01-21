@@ -1,5 +1,6 @@
 #pragma once
 #include "BlackScholesModel.h"
+#include "Asian.h"
 #include <iostream>
 #include <cmath>
 
@@ -8,18 +9,28 @@ class MonteCarloPricer
 public:
 	MonteCarloPricer();
 	MonteCarloPricer(int const& num_sims);
+	MonteCarloPricer(int const& num_sims, int const& n_steps);
 
 	void setNumSims(int const& num_sims);
 	int getNumSims();
+
+	double priceAsian(BlackScholesModel const& model, AsianArithmetic const& option);
+	void priceAndShowAsian(BlackScholesModel const& model, AsianArithmetic const& option);
+	void showPrices();
 
 	template<typename T>
 	double price(BlackScholesModel const& model, T const& option) const;
 	template<typename T>
 	void priceAndPrint(BlackScholesModel const& model, T const& option) const;
+
+	~MonteCarloPricer();
 	
 
 private:
 	int num_sims;
+	int n_steps;
+	std::vector<double>* prices_vector;
+	
 };
 
 

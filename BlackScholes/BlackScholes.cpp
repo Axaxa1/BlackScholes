@@ -6,6 +6,7 @@
 #include "MonteCarloPricer.h"
 #include "European.h"
 #include "Digital.h"
+#include "Asian.h"
 
 int main()
 {
@@ -21,6 +22,11 @@ int main()
     DigitalPut digi_put = DigitalPut(100.0, 1.0);
     optimizer.priceAndPrint(model, digi_call);
     optimizer.priceAndPrint(model, digi_put);
+
+    AsianArithmetic asian = AsianArithmetic(100.0, 1.0);
+    optimizer.priceAndShowAsian(model, asian);
+    //std::cout << optimizer.priceAsian(model, asian);
+
 
 
 }

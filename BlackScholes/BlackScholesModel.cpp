@@ -23,6 +23,20 @@ double BlackScholesModel::generatePrice(double const& T) const
     return S_adjust * exp(sqrt(v * v * T) * gauss_bm);
 }
 
+void BlackScholesModel::generatePath(double const& T, std::vector<double>& prices) const
+{
+    double dt = T / static_cast<double>(prices.size());
+    double drift = exp(dt * (r - 0.5 * v * v));
+    double vol = sqrt(v * v * dt);
+
+    prices[0] = this->getStartingPrice();
+
+    for (int i = 1; i < prices.size(); i++) {
+        double gauss_bm = gaussian_box_muller();
+        prices[i] = prices[i - 1] * drift * exp(vol * gauss_bm);
+    }
+}
+
 double BlackScholesModel::getStartingPrice() const
 {
     return S;
