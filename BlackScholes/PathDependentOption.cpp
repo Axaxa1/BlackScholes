@@ -34,6 +34,11 @@ double PathDependentOption::getMaturity() const
 	return T;
 }
 
+bool PathDependentOption::isPathDependent() const
+{
+	return pathDependent;
+}
+
 double PathDependentOption::payoff(std::vector<double> const& prices_vector) const
 {
 	return 0.0;

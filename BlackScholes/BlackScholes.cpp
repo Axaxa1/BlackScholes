@@ -7,6 +7,7 @@
 #include "European.h"
 #include "Digital.h"
 #include "Asian.h"
+#include <typeinfo>
 
 int main()
 {
@@ -15,19 +16,25 @@ int main()
 
     EuropeanCall call = EuropeanCall(100.0, 1.0); // European Call option
     EuropeanPut put = EuropeanPut(110.0, 1.0); // European put
-    optimizer.priceAndPrint(model, call);
-    optimizer.priceAndPrint(model, put);
+    optimizer.priceAndPrintClassic(model, call);
+    optimizer.priceAndPrintClassic(model, put);
 
     DigitalCall digi_call = DigitalCall(100.0, 1.0);
     DigitalPut digi_put = DigitalPut(100.0, 1.0);
-    optimizer.priceAndPrint(model, digi_call);
-    optimizer.priceAndPrint(model, digi_put);
+    optimizer.priceAndPrintClassic(model, digi_call);
+    optimizer.priceAndPrintClassic(model, digi_put);
 
-    AsianArithmetic asian = AsianArithmetic(100.0, 1.0);
-    optimizer.priceAndShowAsian(model, asian);
-    //std::cout << optimizer.priceAsian(model, asian);
+    AsianArithmeticCall asian_arithmetic_call = AsianArithmeticCall(100.0, 1.0);
+    AsianArithmeticPut asian_arithmetic_put = AsianArithmeticPut(110.0, 1.0);
+    optimizer.priceAndPrintAsian(model, asian_arithmetic_call);
+    optimizer.priceAndPrintAsian(model, asian_arithmetic_put);
 
+    AsianGeometricCall asian_geometric_call = AsianGeometricCall(100.0, 1.0);
+    AsianGeometricPut asian_geometric_put = AsianGeometricPut(110.0, 1.0);
+    optimizer.priceAndPrintAsian(model, asian_geometric_call);
+    optimizer.priceAndPrintAsian(model, asian_geometric_put);
 
+    return 0;
 
 }
 

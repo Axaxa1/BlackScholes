@@ -10,6 +10,7 @@ public:
 
 	double getStrike() const;
 	double getMaturity() const;
+	bool isPathDependent() const;
 
 	virtual double payoff(double const& S) const;
 	virtual ~PathIndependentOption();
@@ -19,6 +20,7 @@ public:
 private:
 	double K;
 	double T;
+	bool pathDependent = false;
 
 };
 

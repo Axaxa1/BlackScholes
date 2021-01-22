@@ -11,6 +11,7 @@ public:
 
 	double getStrike() const;
 	double getMaturity() const;
+	bool isPathDependent() const;
 
 	virtual double payoff(std::vector<double> const& prices_vector) const;
 	virtual ~PathDependentOption();
@@ -20,5 +21,6 @@ public:
 private:
 	double K;
 	double T;
+	bool pathDependent = true;
 };
 

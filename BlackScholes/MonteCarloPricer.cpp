@@ -33,25 +33,6 @@ int MonteCarloPricer::getNumSims()
 	return num_sims;
 }
 
-double MonteCarloPricer::priceAsian(BlackScholesModel const& model, AsianArithmetic const& option)
-{
-	model.generatePath(option.getMaturity(), *prices_vector);
-	
-	double payoff_sum = 0.0;
-	for (int i = 0; i < num_sims; i++) {
-		model.generatePath(option.getMaturity(), *prices_vector);
-		payoff_sum += option.payoff(*prices_vector);
-		}
-		return (payoff_sum / static_cast<double>(num_sims)) * exp(-model.getRiskFreeRate() * option.getMaturity());
-}
-
-void MonteCarloPricer::priceAndShowAsian(BlackScholesModel const& model, AsianArithmetic const& option)
-{
-	model.print();
-	option.print();
-	std::cout << "Estimated price : " << priceAsian(model, option) << std::endl << std::endl;
-}
-
 void MonteCarloPricer::showPrices()
 {
 	for (int i = 0; i < n_steps; i++) {

@@ -33,6 +33,11 @@ double PathIndependentOption::getMaturity() const
 	return T;
 }
 
+bool PathIndependentOption::isPathDependent() const
+{
+	return pathDependent;
+}
+
 double PathIndependentOption::payoff(double const& S) const
 {
 	return 0.0;
