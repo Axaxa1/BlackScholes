@@ -26,13 +26,25 @@ int main()
 
     AsianArithmeticCall asian_arithmetic_call = AsianArithmeticCall(100.0, 1.0);
     AsianArithmeticPut asian_arithmetic_put = AsianArithmeticPut(110.0, 1.0);
-    optimizer.priceAndPrintAsian(model, asian_arithmetic_call);
-    optimizer.priceAndPrintAsian(model, asian_arithmetic_put);
+    optimizer.priceAndPrintComplex(model, asian_arithmetic_call);
+    optimizer.priceAndPrintComplex(model, asian_arithmetic_put);
 
     AsianGeometricCall asian_geometric_call = AsianGeometricCall(100.0, 1.0);
     AsianGeometricPut asian_geometric_put = AsianGeometricPut(110.0, 1.0);
-    optimizer.priceAndPrintAsian(model, asian_geometric_call);
-    optimizer.priceAndPrintAsian(model, asian_geometric_put);
+    optimizer.priceAndPrintComplex(model, asian_geometric_call);
+    optimizer.priceAndPrintComplex(model, asian_geometric_put);
+
+    DoubleDigital double_digital = DoubleDigital(80.0, 120.0, 1);
+    optimizer.priceAndPrintClassic(model, double_digital);
+
+    BullSpread bull_spread = BullSpread(80.0, 120.0, 1);
+    optimizer.priceAndPrintClassic(model, bull_spread);
+
+    BearSpread bear_spread = BearSpread(80.0, 120.0, 1);
+    optimizer.priceAndPrintClassic(model, bear_spread);
+
+    Butterfly butterfly = Butterfly(80.0, 100.0, 1);
+    optimizer.priceAndPrintClassic(model, butterfly);
 
     return 0;
 

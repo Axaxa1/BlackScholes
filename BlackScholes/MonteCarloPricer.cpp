@@ -33,6 +33,18 @@ int MonteCarloPricer::getNumSims()
 	return num_sims;
 }
 
+void MonteCarloPricer::setNumSteps(int const& n_steps)
+{
+	delete prices_vector;
+	prices_vector = new std::vector<double>(n_steps, 0.0);
+	this->n_steps = n_steps;
+}
+
+int MonteCarloPricer::getNumSteps()
+{
+	return n_steps;
+}
+
 void MonteCarloPricer::showPrices()
 {
 	for (int i = 0; i < n_steps; i++) {

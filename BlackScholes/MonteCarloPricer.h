@@ -13,9 +13,11 @@ public:
 
 	void setNumSims(int const& num_sims);
 	int getNumSims();
+	void setNumSteps(int const& n_steps);
+	int getNumSteps();
 	void showPrices();
 
-	// Price any option
+	// Price any option NOT WORKING
 	template<typename T>
 	double price(BlackScholesModel const& model, T const& option);
 	template<typename T>
@@ -23,9 +25,9 @@ public:
 
 	// Price Path Dependent Option
 	template<typename pathDependentOption>
-	double priceAsian(BlackScholesModel const& model, pathDependentOption const& option);
+	double priceComplex(BlackScholesModel const& model, pathDependentOption const& option);
 	template<typename pathDependentOption>
-	void priceAndPrintAsian(BlackScholesModel const& model, pathDependentOption const& option);
+	void priceAndPrintComplex(BlackScholesModel const& model, pathDependentOption const& option);
 	
 	// Price Path Independent Option
 	template<typename pathIndependentOption>
@@ -67,7 +69,7 @@ inline void MonteCarloPricer::priceAndPrint(BlackScholesModel const& model, T co
 
 //Price Path Dependent Option
 template<typename pathDependentOption>
-inline double MonteCarloPricer::priceAsian(BlackScholesModel const& model, pathDependentOption const& option)
+inline double MonteCarloPricer::priceComplex(BlackScholesModel const& model, pathDependentOption const& option)
 {
 	model.generatePath(option.getMaturity(), *prices_vector);
 
@@ -80,11 +82,11 @@ inline double MonteCarloPricer::priceAsian(BlackScholesModel const& model, pathD
 }
 
 template<typename pathDependentOption>
-inline void MonteCarloPricer::priceAndPrintAsian(BlackScholesModel const& model, pathDependentOption const& option)
+inline void MonteCarloPricer::priceAndPrintComplex(BlackScholesModel const& model, pathDependentOption const& option)
 {
 	model.print();
 	option.print();
-	std::cout << "Estimated price : " << priceAsian(model, option) << std::endl << std::endl;
+	std::cout << "Estimated price : " << priceComplex(model, option) << std::endl << std::endl;
 }
 
 // Price Path Independent Option
