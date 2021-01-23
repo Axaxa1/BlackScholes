@@ -32,6 +32,7 @@ public:
 	BullSpread(double const& K1, double const& K2, double const& T);
 
 	double payoff(double const& S) const;
+	double payoff(std::vector<double> const& prices_vector) const;
 	void print() const override;
 	~BullSpread();
 private:
@@ -46,6 +47,7 @@ public:
 	BearSpread(double const& K1, double const& K2, double const& T);
 
 	double payoff(double const& S) const;
+	double payoff(std::vector<double> const& prices_vector) const;
 	void print() const override;
 	~BearSpread();
 private:
@@ -60,6 +62,7 @@ public:
 	Strangle(double const& K1, double const& K2, double const& T);
 
 	double payoff(double const& S) const;
+	double payoff(std::vector<double> const& prices_vector) const;
 	void print() const override;
 	~Strangle();
 private:
@@ -74,6 +77,7 @@ public:
 	Butterfly(double const& K1, double const& K2, double const& T);
 
 	double payoff(double const& S) const;
+	double payoff(std::vector<double> const& prices_vector) const;
 	void print() const override;
 	~Butterfly();
 private:

@@ -92,6 +92,11 @@ double BullSpread::payoff(double const& S) const
 	return 0.0;
 }
 
+double BullSpread::payoff(std::vector<double> const& prices_vector) const
+{
+	return payoff(prices_vector.back());
+}
+
 void BullSpread::print() const
 {
 	std::cout << "-- Bull Spread --" << std::endl;
@@ -124,6 +129,11 @@ double BearSpread::payoff(double const& S) const
 	else if (S < K1)
 		return (K2 - K1) * getMultiplier();
 	return 0.0;
+}
+
+double BearSpread::payoff(std::vector<double> const& prices_vector) const
+{
+	return payoff(prices_vector.back());
 }
 
 void BearSpread::print() const
@@ -160,6 +170,11 @@ double Strangle::payoff(double const& S) const
 	return 0.0;
 }
 
+double Strangle::payoff(std::vector<double> const& prices_vector) const
+{
+	return payoff(prices_vector.back());
+}
+
 void Strangle::print() const
 {
 	std::cout << "-- Strangle --" << std::endl;
@@ -192,6 +207,11 @@ double Butterfly::payoff(double const& S) const
 	else if ((K1+K2)/2 < S && S < K2)
 		return (K2 - S) * getMultiplier();
 	return 0.0;
+}
+
+double Butterfly::payoff(std::vector<double> const& prices_vector) const
+{
+	return payoff(prices_vector.back());
 }
 
 void Butterfly::print() const

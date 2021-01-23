@@ -89,6 +89,11 @@ double DoubleDigital::payoff(double const& S) const
 	return 0.0;
 }
 
+double DoubleDigital::payoff(std::vector<double> const& prices_vector) const
+{
+	return payoff(prices_vector.back());
+}
+
 void DoubleDigital::print() const
 {
 	std::cout << "-- Double Digital --" << std::endl;

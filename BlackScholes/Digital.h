@@ -32,10 +32,10 @@ public:
 	DoubleDigital(double const& K1, double const& K2, double const& T);
 
 	double payoff(double const& S) const;
+	double payoff(std::vector<double> const& prices_vector) const;
 	void print() const override;
 	~DoubleDigital();
 private:
 	double K1;
 	double K2;
 };
-
