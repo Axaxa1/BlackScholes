@@ -8,6 +8,7 @@ Complex::Complex()
 Complex::Complex(std::string const& name)
 {
 	this->name = name;
+    max_T = 0;
 }
 
 void Complex::buyOption(EuropeanCall const& option)
@@ -135,58 +136,58 @@ void Complex::setName(std::string const& name)
 
 void Complex::setMultiplier(double const& multiplier)
 {
-	for (int i = 0; i < static_cast<int>(european_call.size()); i++) {
-		european_call[i].setMultiplier(european_call[i].getMultiplier() * multiplier);
+	for (auto & i : european_call) {
+		i.setMultiplier(i.getMultiplier() * multiplier);
 	}
-	for (int i = 0; i < static_cast<int>(european_put.size()); i++) {
-		european_put[i].setMultiplier(european_put[i].getMultiplier() * multiplier);
+	for (auto & i : european_put) {
+		i.setMultiplier(i.getMultiplier() * multiplier);
 	}
-	for (int i = 0; i < static_cast<int>(digital_call.size()); i++) {
-		digital_call[i].setMultiplier(digital_call[i].getMultiplier() * multiplier);
+	for (auto & i : digital_call) {
+		i.setMultiplier(i.getMultiplier() * multiplier);
 	}
-	for (int i = 0; i < static_cast<int>(digital_put.size()); i++) {
-		digital_put[i].setMultiplier(digital_put[i].getMultiplier() * multiplier);
+	for (auto & i : digital_put) {
+		i.setMultiplier(i.getMultiplier() * multiplier);
 	}
-	for (int i = 0; i < static_cast<int>(asian_arithmetic_call.size()); i++) {
-		asian_arithmetic_call[i].setMultiplier(asian_arithmetic_call[i].getMultiplier() * multiplier);
+	for (auto & i : asian_arithmetic_call) {
+		i.setMultiplier(i.getMultiplier() * multiplier);
 	}
-	for (int i = 0; i < static_cast<int>(asian_arithmetic_put.size()); i++) {
-		asian_arithmetic_put[i].setMultiplier(asian_arithmetic_put[i].getMultiplier() * multiplier);
+	for (auto & i : asian_arithmetic_put) {
+		i.setMultiplier(i.getMultiplier() * multiplier);
 	}
-	for (int i = 0; i < static_cast<int>(asian_geometric_call.size()); i++) {
-		asian_geometric_call[i].setMultiplier(asian_geometric_call[i].getMultiplier() * multiplier);
+	for (auto & i : asian_geometric_call) {
+		i.setMultiplier(i.getMultiplier() * multiplier);
 	}
-	for (int i = 0; i < static_cast<int>(asian_geometric_put.size()); i++) {
-		asian_geometric_put[i].setMultiplier(asian_geometric_put[i].getMultiplier() * multiplier);
+	for (auto & i : asian_geometric_put) {
+		i.setMultiplier(i.getMultiplier() * multiplier);
 	}
 }
 
 double Complex::payoff(std::vector<double> const& prices_vector) const
 {
 	double sum = 0.0;
-	for (int i = 0; i < static_cast<int>(european_call.size()); i++) {
-		sum += european_call[i].payoff(prices_vector);
+	for (const auto & i : european_call) {
+		sum += i.payoff(prices_vector);
 	}
-	for (int i = 0; i < static_cast<int>(european_put.size()); i++) {
-		sum += european_put[i].payoff(prices_vector);
+	for (const auto & i : european_put) {
+		sum += i.payoff(prices_vector);
 	}
-	for (int i = 0; i < static_cast<int>(digital_call.size()); i++) {
-		sum += digital_call[i].payoff(prices_vector);
+	for (const auto & i : digital_call) {
+		sum += i.payoff(prices_vector);
 	}
-	for (int i = 0; i < static_cast<int>(digital_put.size()); i++) {
-		sum += digital_put[i].payoff(prices_vector);
+	for (const auto & i : digital_put) {
+		sum += i.payoff(prices_vector);
 	}
-	for (int i = 0; i < static_cast<int>(asian_arithmetic_call.size()); i++) {
-		sum += asian_arithmetic_call[i].payoff(prices_vector);
+	for (const auto & i : asian_arithmetic_call) {
+		sum += i.payoff(prices_vector);
 	}
-	for (int i = 0; i < static_cast<int>(asian_arithmetic_put.size()); i++) {
-		sum += asian_arithmetic_put[i].payoff(prices_vector);
+	for (const auto & i : asian_arithmetic_put) {
+		sum += i.payoff(prices_vector);
 	}
-	for (int i = 0; i < static_cast<int>(asian_geometric_call.size()); i++) {
-		sum += asian_geometric_call[i].payoff(prices_vector);
+	for (const auto & i : asian_geometric_call) {
+		sum += i.payoff(prices_vector);
 	}
-	for (int i = 0; i < static_cast<int>(asian_geometric_put.size()); i++) {
-		sum += asian_geometric_put[i].payoff(prices_vector);
+	for (const auto & i : asian_geometric_put) {
+		sum += i.payoff(prices_vector);
 	}
 	return sum;
 }
@@ -194,39 +195,39 @@ double Complex::payoff(std::vector<double> const& prices_vector) const
 void Complex::print() const
 {
 	std::cout << "** Complex Option : "<< name << " ** "<< std::endl;
-	std::cout << "Max maturity : " << max_T << std::endl;
-	std::cout << "Composed of " << std::endl;
-	for (int i = 0; i < static_cast<int>(european_call.size()); i++) {
+	std::cout << " Max maturity: " << max_T << std::endl;
+	std::cout << " Composed of " << std::endl;
+	for (const auto & i : european_call) {
 		std::cout << "* ";
-		european_call[i].print();
+		i.print();
 	}
-	for (int i = 0; i < static_cast<int>(european_put.size()); i++) {
+	for (const auto & i : european_put) {
 		std::cout << "* ";
-		european_put[i].print();
+		i.print();
 	}
-	for (int i = 0; i < static_cast<int>(digital_call.size()); i++) {
+	for (const auto & i : digital_call) {
 		std::cout << "* ";
-		digital_call[i].print();
+		i.print();
 	}
-	for (int i = 0; i < static_cast<int>(digital_put.size()); i++) {
+	for (const auto & i : digital_put) {
 		std::cout << "* ";
-		digital_put[i].print();
+		i.print();
 	}
-	for (int i = 0; i < static_cast<int>(asian_arithmetic_call.size()); i++) {
+	for (const auto & i : asian_arithmetic_call) {
 		std::cout << "* ";
-		asian_arithmetic_call[i].print();
+		i.print();
 	}
-	for (int i = 0; i < static_cast<int>(asian_arithmetic_put.size()); i++) {
+	for (const auto & i : asian_arithmetic_put) {
 		std::cout << "* ";
-		asian_arithmetic_put[i].print();
+		i.print();
 	}
-	for (int i = 0; i < static_cast<int>(asian_geometric_call.size()); i++) {
+	for (const auto & i : asian_geometric_call) {
 		std::cout << "* ";
-		asian_geometric_call[i].print();
+		i.print();
 	}
-	for (int i = 0; i < static_cast<int>(asian_geometric_put.size()); i++) {
+	for (const auto & i : asian_geometric_put) {
 		std::cout << "* ";
-		asian_geometric_put[i].print();
+		i.print();
 	}
 }
 
