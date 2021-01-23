@@ -1,7 +1,6 @@
 #pragma once
 #ifndef BLACKSCHOLES_PRICE_CI_H
 #define BLACKSCHOLES_PRICE_CI_H
-#include <vector>
 
 /*
 The Price_CI class takes takes a price estimate, std deviation of prices obtained in Monte Carlo sims
