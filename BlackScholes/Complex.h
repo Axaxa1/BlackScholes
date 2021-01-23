@@ -30,7 +30,16 @@ public:
 	void buyOption(AsianGeometricCall const& option, double const& multiplier);
 	void buyOption(AsianGeometricPut const& option, double const& multiplier);
 
+	// Complex operator= (Complex const& options);
+	Complex operator+ (Complex const& options) const;
+	Complex& operator+= (Complex const& options);
+	Complex operator- (Complex const& options) const;
+	Complex& operator-= (Complex const& options);
+	Complex operator* (double const& x);
+	Complex operator/ (double const& x);
+
 	double getMaturity() const;
+	std::string getName() const;
 
 	void setName(std::string const& name);
 	void setMultiplier(double const& multiplier);
@@ -40,6 +49,7 @@ public:
 	void print() const;
 
 	~Complex();
+	
 
 private:
 	std::string name;
@@ -53,6 +63,8 @@ private:
 	std::vector<AsianArithmeticPut> asian_arithmetic_put;
 	std::vector<AsianGeometricCall> asian_geometric_call;
 	std::vector<AsianGeometricPut> asian_geometric_put;
+
+	Complex sum(Complex const& options) const;
 
 };
 

@@ -26,13 +26,13 @@ int main()
 
     AsianArithmeticCall asian_arithmetic_call = AsianArithmeticCall(100.0, 1.0);
     AsianArithmeticPut asian_arithmetic_put = AsianArithmeticPut(110.0, 1.0);
-    optimizer.priceAndPrintComplex(model, asian_arithmetic_call);
-    optimizer.priceAndPrintComplex(model, asian_arithmetic_put);
+    optimizer.priceAndPrint(model, asian_arithmetic_call);
+    optimizer.priceAndPrint(model, asian_arithmetic_put);
 
     AsianGeometricCall asian_geometric_call = AsianGeometricCall(100.0, 1.0);
     AsianGeometricPut asian_geometric_put = AsianGeometricPut(110.0, 1.0);
-    optimizer.priceAndPrintComplex(model, asian_geometric_call);
-    optimizer.priceAndPrintComplex(model, asian_geometric_put);
+    optimizer.priceAndPrint(model, asian_geometric_call);
+    optimizer.priceAndPrint(model, asian_geometric_put);
 
     DoubleDigital double_digital = DoubleDigital(80.0, 120.0, 1);
     optimizer.priceAndPrintClassic(model, double_digital);
@@ -51,13 +51,15 @@ int main()
 
     Complex test = Complex("Test");
     test.buyOption(call);
-    call.setMultiplier(-1);
-    test.buyOption(call);
-    test.setMultiplier(2);
+
+    Complex test2 = Complex("Test2");
+    test2.buyOption(call);
+
+    test -= test2;
     optimizer.priceAndPrint(model, test);
 
-    BullSpread2 test2 = BullSpread2(70, 140, 1);
-    optimizer.priceAndPrint(model, test2);
+    BullSpread2 test4 = BullSpread2(70, 140, 1);
+    optimizer.priceAndPrint(model, test4);
 
     
 
