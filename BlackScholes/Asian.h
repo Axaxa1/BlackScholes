@@ -7,7 +7,7 @@ public:
 	AsianArithmeticCall();
 	AsianArithmeticCall(double const& K, double const& T);
 
-	double payoff(std::vector<double> const& prices_vector) const;
+	double payoff(std::vector<double> const& prices_vector) const override;
 	void print() const override;
 	~AsianArithmeticCall();
 	
@@ -19,7 +19,7 @@ public:
 	AsianArithmeticPut();
 	AsianArithmeticPut(double const& K, double const& T);
 
-	double payoff(std::vector<double> const& prices_vector) const;
+	double payoff(std::vector<double> const& prices_vector) const override;
 	void print() const override;
 	~AsianArithmeticPut();
 
@@ -31,7 +31,7 @@ public:
 	AsianGeometricCall();
 	AsianGeometricCall(double const& K, double const& T);
 
-	double payoff(std::vector<double> const& prices_vector) const;
+	double payoff(std::vector<double> const& prices_vector) const override;
 	void print() const override;
 	~AsianGeometricCall();
 
@@ -43,7 +43,7 @@ public:
 	AsianGeometricPut();
 	AsianGeometricPut(double const& K, double const& T);
 
-	double payoff(std::vector<double> const& prices_vector) const;
+	double payoff(std::vector<double> const& prices_vector) const override;
 	void print() const override;
 	~AsianGeometricPut();
 
