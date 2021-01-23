@@ -28,7 +28,7 @@ double EuropeanCall::payoff(std::vector<double> const& prices_vector) const
 
 void EuropeanCall::print() const
 {
-	std::cout << "-- European Call --" << std::endl;
+	std::cout << "--- European Call ---" << std::endl;
 	PathIndependentOption::print();
 }
 
@@ -62,7 +62,7 @@ double EuropeanPut::payoff(std::vector<double> const& prices_vector) const
 
 void EuropeanPut::print() const
 {
-	std::cout << "-- European Put --" << std::endl;
+	std::cout << "--- European Put ---" << std::endl;
 	PathIndependentOption::print();
 }
 
@@ -99,10 +99,10 @@ double BullSpread::payoff(std::vector<double> const& prices_vector) const
 
 void BullSpread::print() const
 {
-	std::cout << "-- Bull Spread --" << std::endl;
-	std::cout << "Low Strike : " << K1 << std::endl;
-	std::cout << "High Strike : " << K2 << std::endl;
-	std::cout << "Maturity : " << this->getMaturity() << std::endl;
+	std::cout << "--- Bull Spread ---" << std::endl;
+	std::cout << " Low Strike:      " << K1 << std::endl;
+	std::cout << " High Strike:     " << K2 << std::endl;
+	std::cout << " Maturity:        " << this->getMaturity() << std::endl;
 }
 
 BullSpread::~BullSpread()
@@ -138,10 +138,10 @@ double BearSpread::payoff(std::vector<double> const& prices_vector) const
 
 void BearSpread::print() const
 {
-	std::cout << "-- Bear Spread --" << std::endl;
-	std::cout << "Low Strike : " << K1 << std::endl;
-	std::cout << "High Strike : " << K2 << std::endl;
-	std::cout << "Maturity : " << this->getMaturity() << std::endl;
+	std::cout << "--- Bear Spread ---" << std::endl;
+    std::cout << " Low Strike:      " << K1 << std::endl;
+    std::cout << " High Strike:     " << K2 << std::endl;
+    std::cout << " Maturity:        " << this->getMaturity() << std::endl;
 }
 
 BearSpread::~BearSpread()
@@ -177,10 +177,10 @@ double Strangle::payoff(std::vector<double> const& prices_vector) const
 
 void Strangle::print() const
 {
-	std::cout << "-- Strangle --" << std::endl;
-	std::cout << "Low Strike : " << K1 << std::endl;
-	std::cout << "High Strike : " << K2 << std::endl;
-	std::cout << "Maturity : " << this->getMaturity() << std::endl;
+	std::cout << "--- Strangle ---" << std::endl;
+    std::cout << " Low Strike:      " << K1 << std::endl;
+    std::cout << " High Strike:     " << K2 << std::endl;
+    std::cout << " Maturity:        " << this->getMaturity() << std::endl;
 }
 
 Strangle::~Strangle()
@@ -216,10 +216,10 @@ double Butterfly::payoff(std::vector<double> const& prices_vector) const
 
 void Butterfly::print() const
 {
-	std::cout << "-- Butterfly --" << std::endl;
-	std::cout << "Low Strike : " << K1 << std::endl;
-	std::cout << "High Strike : " << K2 << std::endl;
-	std::cout << "Maturity : " << this->getMaturity() << std::endl;
+	std::cout << "--- Butterfly ---" << std::endl;
+    std::cout << " Low Strike:      " << K1 << std::endl;
+    std::cout << " High Strike:     " << K2 << std::endl;
+    std::cout << " Maturity:        " << this->getMaturity() << std::endl;
 }
 
 Butterfly::~Butterfly()

@@ -16,10 +16,10 @@ public:
 	MonteCarloPricer(int const& num_sims, int const& n_steps);
 
 	void setNumSims(int const& num_sims);
-	int getNumSims();
+	int getNumSims() const;
 	void setNumSteps(int const& n_steps);
-	int getNumSteps();
-	void showPrices();
+	int getNumSteps() const;
+	void showPrices() const;
 
 	// Price any option NOT WORKING
 	template<typename T>

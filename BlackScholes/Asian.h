@@ -1,6 +1,7 @@
 #pragma once
 #include "PathDependentOption.h"
 #include <vector>
+
 class AsianArithmeticCall : public PathDependentOption
 {
 public:

@@ -27,7 +27,7 @@ double DigitalCall::payoff(std::vector<double> const& prices_vector) const
 
 void DigitalCall::print() const
 {
-	std::cout << "-- Digital Call --" << std::endl;
+	std::cout << "--- Digital Call ---" << std::endl;
 	PathIndependentOption::print();
 }
 
@@ -61,7 +61,7 @@ double DigitalPut::payoff(std::vector<double> const& prices_vector) const
 
 void DigitalPut::print() const
 {
-	std::cout << "-- Digital Put --" << std::endl;
+	std::cout << "--- Digital Put ---" << std::endl;
 	PathIndependentOption::print();
 }
 
@@ -96,10 +96,10 @@ double DoubleDigital::payoff(std::vector<double> const& prices_vector) const
 
 void DoubleDigital::print() const
 {
-	std::cout << "-- Double Digital --" << std::endl;
-	std::cout << "Low Strike : " << K1 << std::endl;
-	std::cout << "High Strike : " << K2 << std::endl;
-	std::cout << "Maturity : " << this->getMaturity() << std::endl;
+	std::cout << "--- Double Digital ---" << std::endl;
+	std::cout << " Low Strike:      " << K1 << std::endl;
+	std::cout << " High Strike:     " << K2 << std::endl;
+	std::cout << " Maturity:        " << this->getMaturity() << std::endl;
 }
 
 DoubleDigital::~DoubleDigital()

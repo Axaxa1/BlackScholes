@@ -17,8 +17,8 @@ AsianArithmeticCall::AsianArithmeticCall(double const& K, double const& T)
 double AsianArithmeticCall::payoff(std::vector<double> const& prices_vector) const
 {
 	double mean = 0;
-	for (int i = 0; i < static_cast<int>(prices_vector.size()); i++) {
-		mean += prices_vector[i];
+	for (double i : prices_vector) {
+		mean += i;
 	}
 	mean /= static_cast<double>(prices_vector.size());
 
@@ -29,7 +29,7 @@ double AsianArithmeticCall::payoff(std::vector<double> const& prices_vector) con
 
 void AsianArithmeticCall::print() const
 {
-	std::cout << "-- Asian Arithmethic Call --" << std::endl;
+	std::cout << "--- Asian Arithmethic Call ---" << std::endl;
 	PathDependentOption::print();
 }
 
@@ -52,8 +52,8 @@ AsianArithmeticPut::AsianArithmeticPut(double const& K, double const& T)
 double AsianArithmeticPut::payoff(std::vector<double> const& prices_vector) const
 {
 	double mean = 0;
-	for (int i = 0; i < static_cast<int>(prices_vector.size()); i++) {
-		mean += prices_vector[i];
+	for (double i : prices_vector) {
+		mean += i;
 	}
 	mean /= static_cast<double>(prices_vector.size());
 
@@ -64,7 +64,7 @@ double AsianArithmeticPut::payoff(std::vector<double> const& prices_vector) cons
 
 void AsianArithmeticPut::print() const
 {
-	std::cout << "-- Asian Arithmethic Put --" << std::endl;
+	std::cout << "--- Asian Arithmethic Put ---" << std::endl;
 	PathDependentOption::print();
 }
 
@@ -87,8 +87,8 @@ AsianGeometricCall::AsianGeometricCall(double const& K, double const& T)
 double AsianGeometricCall::payoff(std::vector<double> const& prices_vector) const
 {
 	double geometric_mean = 0;
-	for (int i = 0; i < static_cast<int>(prices_vector.size()); i++) {
-		geometric_mean += log(prices_vector[i]);
+	for (double i : prices_vector) {
+		geometric_mean += log(i);
 	}
 	geometric_mean = exp(geometric_mean / static_cast<double>(prices_vector.size()));
 
@@ -99,7 +99,7 @@ double AsianGeometricCall::payoff(std::vector<double> const& prices_vector) cons
 
 void AsianGeometricCall::print() const
 {
-	std::cout << "-- Asian Geometric Call --" << std::endl;
+	std::cout << "--- Asian Geometric Call ---" << std::endl;
 	PathDependentOption::print();
 }
 
@@ -122,8 +122,8 @@ AsianGeometricPut::AsianGeometricPut(double const& K, double const& T)
 double AsianGeometricPut::payoff(std::vector<double> const& prices_vector) const
 {
 	double geometric_mean = 0;
-	for (int i = 0; i < static_cast<int>(prices_vector.size()); i++) {
-		geometric_mean += log(prices_vector[i]);
+	for (double i : prices_vector) {
+		geometric_mean += log(i);
 	}
 	geometric_mean = exp(geometric_mean / static_cast<double>(prices_vector.size()));
 
@@ -134,7 +134,7 @@ double AsianGeometricPut::payoff(std::vector<double> const& prices_vector) const
 
 void AsianGeometricPut::print() const
 {
-	std::cout << "-- Asian Geometric Put --" << std::endl;
+	std::cout << "--- Asian Geometric Put ---" << std::endl;
 	PathDependentOption::print();
 }
 
