@@ -55,7 +55,7 @@ inline PriceCI MonteCarloPricer::price(BlackScholesModel const& model, T const& 
 {
 	model.generatePath(option.getMaturity(), *prices_vector);
 
-	double payoff = 0.0, payoff_sum=0.0, payoff_sq_mean=0.0;
+	double payoff, payoff_sum=0.0, payoff_sq_mean=0.0;
 	for (int i = 0; i < num_sims; i++) {
 		model.generatePath(option.getMaturity(), *prices_vector);
 		payoff = option.payoff(*prices_vector);
@@ -66,13 +66,14 @@ inline PriceCI MonteCarloPricer::price(BlackScholesModel const& model, T const& 
 	double payoff_std = (payoff_sq_mean / static_cast<double>(num_sims)) - payoff_mean * payoff_mean;
 	payoff_mean *= exp(-model.getRiskFreeRate() * option.getMaturity());
 	payoff_std *= exp(-2 * model.getRiskFreeRate() * option.getMaturity());
-	return PriceCI(payoff_mean, payoff_std, num_sims);
+	return {payoff_mean, payoff_std, num_sims};
 }
 
 template<typename T>
 inline void MonteCarloPricer::priceAndPrint(BlackScholesModel const& model, T const& option)
 {
 	model.print();
+
 	option.print();
 	price(model, option).print_CI();
 }
@@ -83,7 +84,7 @@ inline PriceCI MonteCarloPricer::priceComplex(BlackScholesModel const& model, pa
 {
 	model.generatePath(option.getMaturity(), *prices_vector);
 
-    double payoff = 0.0, payoff_sum=0.0, payoff_sq_mean=0.0;;
+    double payoff, payoff_sum=0.0, payoff_sq_mean=0.0;;
 	for (int i = 0; i < num_sims; i++) {
 		model.generatePath(option.getMaturity(), *prices_vector);
 		payoff = option.payoff(*prices_vector);
@@ -94,13 +95,15 @@ inline PriceCI MonteCarloPricer::priceComplex(BlackScholesModel const& model, pa
     double payoff_std = (payoff_sq_mean / static_cast<double>(num_sims)) - payoff_mean * payoff_mean;
     payoff_mean *= exp(-model.getRiskFreeRate() * option.getMaturity());
     payoff_std *= exp(-2 * model.getRiskFreeRate() * option.getMaturity());
-    return PriceCI(payoff_mean, payoff_std, num_sims);
+    return {payoff_mean, payoff_std, num_sims};
 }
 
 template<typename pathDependentOption>
 inline void MonteCarloPricer::priceAndPrintComplex(BlackScholesModel const& model, pathDependentOption const& option)
 {
 	model.print();
+    std::cout << " Number of paths: " << num_sims << std::endl;
+    std::cout << " Steps:           " << n_steps << std::endl;
 	option.print();
 	priceComplex(model, option).print_CI();
 }
@@ -109,7 +112,7 @@ inline void MonteCarloPricer::priceAndPrintComplex(BlackScholesModel const& mode
 template<typename pathIndependentOption>
 inline PriceCI MonteCarloPricer::priceClassic(BlackScholesModel const& model, pathIndependentOption const& option) const
 {
-    double payoff = 0.0, payoff_sum=0.0, payoff_sq_mean=0.0;
+    double payoff, payoff_sum=0.0, payoff_sq_mean=0.0;
 	for (int i = 0; i < num_sims; i++) {
 		payoff = option.payoff(model.generatePrice(option.getMaturity()));
         payoff_sum += payoff;
@@ -119,13 +122,14 @@ inline PriceCI MonteCarloPricer::priceClassic(BlackScholesModel const& model, pa
     double payoff_std = (payoff_sq_mean / static_cast<double>(num_sims)) - payoff_mean * payoff_mean;
     payoff_mean *= exp(-model.getRiskFreeRate() * option.getMaturity());
     payoff_std *= exp(-2 * model.getRiskFreeRate() * option.getMaturity());
-    return PriceCI(payoff_mean, payoff_std, num_sims);
+    return {payoff_mean, payoff_std, num_sims};
 }
 
 template<typename pathIndependentOption>
 inline void MonteCarloPricer::priceAndPrintClassic(BlackScholesModel const& model, pathIndependentOption const& option) const
 {
 	model.print();
+    std::cout << " Number of paths: " << num_sims << std::endl;
 	option.print();
 	priceClassic(model, option).print_CI();
 }
