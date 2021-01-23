@@ -6,7 +6,9 @@
 /*
 The Price_CI class takes takes a price estimate, std deviation of prices obtained in Monte Carlo sims
  and number of simulations and allows to compute and print the estimated price as well as a 95% confidence level
- asymptotic confidence interval
+ asymptotic confidence interval.
+ The formula for the Confidence interval is estimate +- sqrt(stdev/num_sims) * q_0.975 where q_0.975 is
+ the 0.975 quantile of the normal distrib.
 */
 class Price_CI {
 private:
