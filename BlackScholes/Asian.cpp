@@ -22,7 +22,7 @@ double AsianArithmeticCall::payoff(std::vector<double> const& prices_vector) con
 	mean /= static_cast<double>(prices_vector.size());
 
 	if ((mean - this->getStrike()) > 0)
-		return mean - this->getStrike();
+		return (mean - this->getStrike())*getMultiplier();
 	return 0.0;
 }
 
@@ -57,7 +57,7 @@ double AsianArithmeticPut::payoff(std::vector<double> const& prices_vector) cons
 	mean /= static_cast<double>(prices_vector.size());
 
 	if ((this->getStrike()) - mean > 0)
-		return this->getStrike() - mean;
+		return (this->getStrike() - mean) * getMultiplier();
 	return 0.0;
 }
 
@@ -92,13 +92,13 @@ double AsianGeometricCall::payoff(std::vector<double> const& prices_vector) cons
 	geometric_mean = exp(geometric_mean / static_cast<double>(prices_vector.size()));
 
 	if ((geometric_mean - this->getStrike()) > 0)
-		return geometric_mean - this->getStrike();
+		return (geometric_mean - this->getStrike()) * getMultiplier();
 	return 0.0;
 }
 
 void AsianGeometricCall::print() const
 {
-	std::cout << "-- Asian Arithmethic Call --" << std::endl;
+	std::cout << "-- Asian Geometric Call --" << std::endl;
 	PathDependentOption::print();
 }
 
@@ -127,13 +127,13 @@ double AsianGeometricPut::payoff(std::vector<double> const& prices_vector) const
 	geometric_mean = exp(geometric_mean / static_cast<double>(prices_vector.size()));
 
 	if ((this->getStrike()) - geometric_mean > 0)
-		return this->getStrike() - geometric_mean;
+		return (this->getStrike() - geometric_mean) * getMultiplier();
 	return 0.0;
 }
 
 void AsianGeometricPut::print() const
 {
-	std::cout << "-- Asian Arithmethic Put --" << std::endl;
+	std::cout << "-- Asian Geometric Put --" << std::endl;
 	PathDependentOption::print();
 }
 

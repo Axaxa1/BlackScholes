@@ -8,7 +8,8 @@ public:
 	EuropeanCall(double const& K, double const& T);
 
 	double payoff(double const& S) const;
-	void print() const;
+	double payoff(std::vector<double> const& prices_vector) const;
+	void print() const override;
 	~EuropeanCall();
 };
 
@@ -19,7 +20,8 @@ public:
 	EuropeanPut(double const& K, double const& T);
 
 	double payoff(double const& S) const;
-	void print() const;
+	double payoff(std::vector<double> const& prices_vector) const;
+	void print() const override;
 	~EuropeanPut();
 };
 
@@ -30,7 +32,7 @@ public:
 	BullSpread(double const& K1, double const& K2, double const& T);
 
 	double payoff(double const& S) const;
-	void print() const;
+	void print() const override;
 	~BullSpread();
 private:
 	double K1;
@@ -44,7 +46,7 @@ public:
 	BearSpread(double const& K1, double const& K2, double const& T);
 
 	double payoff(double const& S) const;
-	void print() const;
+	void print() const override;
 	~BearSpread();
 private:
 	double K1;
@@ -58,7 +60,7 @@ public:
 	Strangle(double const& K1, double const& K2, double const& T);
 
 	double payoff(double const& S) const;
-	void print() const;
+	void print() const override;
 	~Strangle();
 private:
 	double K1;
@@ -72,7 +74,7 @@ public:
 	Butterfly(double const& K1, double const& K2, double const& T);
 
 	double payoff(double const& S) const;
-	void print() const;
+	void print() const override;
 	~Butterfly();
 private:
 	double K1;

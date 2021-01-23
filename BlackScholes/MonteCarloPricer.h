@@ -29,7 +29,7 @@ public:
 	template<typename pathDependentOption>
 	void priceAndPrintComplex(BlackScholesModel const& model, pathDependentOption const& option);
 	
-	// Price Path Independent Option
+	// Price Path Independent Option | Quick method
 	template<typename pathIndependentOption>
 	double priceClassic(BlackScholesModel const& model, pathIndependentOption const& option) const;
 	template<typename pathIndependentOption>
@@ -45,26 +45,26 @@ private:
 	
 };
 
-// Price Any Option NOT WORKING
+// Price Any Option
 template<typename T>
 inline double MonteCarloPricer::price(BlackScholesModel const& model, T const& option)
 {
-	if (option.isPathDependent()) {
-		std::cout << "Path Dependent" << std::endl;
+	model.generatePath(option.getMaturity(), *prices_vector);
+
+	double payoff_sum = 0.0;
+	for (int i = 0; i < num_sims; i++) {
+		model.generatePath(option.getMaturity(), *prices_vector);
+		payoff_sum += option.payoff(*prices_vector);
 	}
-	else {
-		std::cout << "Path Independent" << std::endl;
-	}
-	return 0.0;
+	return (payoff_sum / static_cast<double>(num_sims)) * exp(-model.getRiskFreeRate() * option.getMaturity());
 }
 
 template<typename T>
 inline void MonteCarloPricer::priceAndPrint(BlackScholesModel const& model, T const& option)
 {
-	if (option.isPathDependent())
-		priceAndPrintAsian(model, option);
-	else
-		priceAndPrintClassic(model, option);
+	model.print();
+	option.print();
+	std::cout << "Estimated price : " << price(model, option) << std::endl << std::endl;
 }
 
 //Price Path Dependent Option

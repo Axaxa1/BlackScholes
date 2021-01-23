@@ -23,6 +23,11 @@ void PathIndependentOption::setMaturity(double const& T)
 	this->T = T;
 }
 
+void PathIndependentOption::setMultiplier(double const& multiplier)
+{
+	this->multiplier = multiplier;
+}
+
 double PathIndependentOption::getStrike() const
 {
 	return K;
@@ -33,12 +38,17 @@ double PathIndependentOption::getMaturity() const
 	return T;
 }
 
-bool PathIndependentOption::isPathDependent() const
+double PathIndependentOption::getMultiplier() const
 {
-	return pathDependent;
+	return multiplier;
 }
 
 double PathIndependentOption::payoff(double const& S) const
+{
+	return 0.0;
+}
+
+double PathIndependentOption::payoff(std::vector<double> prices_vector) const
 {
 	return 0.0;
 }
@@ -51,5 +61,7 @@ void PathIndependentOption::print() const
 {
 	std::cout << "Strike K : " << K << std::endl;
 	std::cout << "Maturity T : " << T << " (in years)" << std::endl;
+	if (multiplier != 1.0)
+		std::cout << "Multiplier : " << multiplier << std::endl;
 
 }

@@ -8,7 +8,8 @@ public:
 	DigitalCall(double const& K, double const& T);
 
 	double payoff(double const& S) const;
-	void print() const;
+	double payoff(std::vector<double> const& prices_vector) const;
+	void print() const override;
 	~DigitalCall();
 };
 
@@ -19,7 +20,8 @@ public:
 	DigitalPut(double const& K, double const& T);
 
 	double payoff(double const& S) const;
-	void print() const;
+	double payoff(std::vector<double> const& prices_vector) const;
+	void print() const override;
 	~DigitalPut();
 };
 
@@ -30,7 +32,7 @@ public:
 	DoubleDigital(double const& K1, double const& K2, double const& T);
 
 	double payoff(double const& S) const;
-	void print() const;
+	void print() const override;
 	~DoubleDigital();
 private:
 	double K1;

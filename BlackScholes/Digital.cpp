@@ -16,8 +16,13 @@ DigitalCall::DigitalCall(double const& K, double const& T)
 double DigitalCall::payoff(double const& S) const
 {
 	if ((S - this->getStrike()) > 0)
-		return 1.0;
+		return 1.0 * getMultiplier();
 	return 0.0;
+}
+
+double DigitalCall::payoff(std::vector<double> const& prices_vector) const
+{
+	return payoff(prices_vector.back());
 }
 
 void DigitalCall::print() const
@@ -45,8 +50,13 @@ DigitalPut::DigitalPut(double const& K, double const& T)
 double DigitalPut::payoff(double const& S) const
 {
 	if ((S - this->getStrike()) < 0)
-		return 1.0;
+		return 1.0 * getMultiplier();
 	return 0.0;
+}
+
+double DigitalPut::payoff(std::vector<double> const& prices_vector) const
+{
+	return payoff(prices_vector.back());
 }
 
 void DigitalPut::print() const
@@ -75,7 +85,7 @@ DoubleDigital::DoubleDigital(double const& K1, double const& K2, double const& T
 double DoubleDigital::payoff(double const& S) const
 {
 	if (K1 < S && K2 > S)
-		return 1.0;
+		return 1.0 * getMultiplier();
 	return 0.0;
 }
 

@@ -17,8 +17,13 @@ EuropeanCall::EuropeanCall(double const& K, double const& T)
 double EuropeanCall::payoff(double const& S) const
 {
 	if ((S-this->getStrike()) > 0)
-		return S-this->getStrike();
+		return (S-this->getStrike()) * getMultiplier();
 	return 0.0;
+}
+
+double EuropeanCall::payoff(std::vector<double> const& prices_vector) const
+{
+	return payoff(prices_vector.back());
 }
 
 void EuropeanCall::print() const
@@ -46,8 +51,13 @@ EuropeanPut::EuropeanPut(double const& K, double const& T)
 double EuropeanPut::payoff(double const& S) const
 {
 	if ((this->getStrike() - S) > 0)
-		return this->getStrike() - S;
+		return (this->getStrike() - S) * getMultiplier();
 	return 0.0;
+}
+
+double EuropeanPut::payoff(std::vector<double> const& prices_vector) const
+{
+	return payoff(prices_vector.back());
 }
 
 void EuropeanPut::print() const
@@ -76,9 +86,9 @@ BullSpread::BullSpread(double const& K1, double const& K2, double const& T)
 double BullSpread::payoff(double const& S) const
 {
 	if (K1 < S && K2 > S)
-		return S - K1;
+		return (S - K1) * getMultiplier();
 	else if (K2 < S)
-		return K2 - K1;
+		return (K2 - K1) * getMultiplier();
 	return 0.0;
 }
 
@@ -110,9 +120,9 @@ BearSpread::BearSpread(double const& K1, double const& K2, double const& T)
 double BearSpread::payoff(double const& S) const
 {
 	if (K1 < S && K2 > S)
-		return K2 - S;
+		return (K2 - S) * getMultiplier();
 	else if (S < K1)
-		return K2 - K1;
+		return (K2 - K1) * getMultiplier();
 	return 0.0;
 }
 
@@ -144,9 +154,9 @@ Strangle::Strangle(double const& K1, double const& K2, double const& T)
 double Strangle::payoff(double const& S) const
 {
 	if (S < K1)
-		return K1 - S;
+		return (K1 - S) * getMultiplier();
 	else if (S > K2)
-		return S - K2;
+		return (S - K2) * getMultiplier();
 	return 0.0;
 }
 
@@ -178,9 +188,9 @@ Butterfly::Butterfly(double const& K1, double const& K2, double const& T)
 double Butterfly::payoff(double const& S) const
 {
 	if (K1 < S && S < (K1+K2)/2)
-		return S - K1;
+		return (S - K1) * getMultiplier();
 	else if ((K1+K2)/2 < S && S < K2)
-		return K2 - S;
+		return (K2 - S) * getMultiplier();
 	return 0.0;
 }
 

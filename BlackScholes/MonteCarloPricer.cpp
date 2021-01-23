@@ -25,7 +25,7 @@ MonteCarloPricer::MonteCarloPricer(int const& num_sims, int const& n_steps)
 
 void MonteCarloPricer::setNumSims(int const& num_sims)
 {
-	this->num_sims = 1000;
+	this->num_sims = num_sims;
 }
 
 int MonteCarloPricer::getNumSims()

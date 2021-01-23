@@ -7,7 +7,7 @@
 #include "European.h"
 #include "Digital.h"
 #include "Asian.h"
-#include <typeinfo>
+#include "Complex.h"
 
 int main()
 {
@@ -37,7 +37,7 @@ int main()
     DoubleDigital double_digital = DoubleDigital(80.0, 120.0, 1);
     optimizer.priceAndPrintClassic(model, double_digital);
 
-    BullSpread bull_spread = BullSpread(80.0, 120.0, 1);
+    BullSpread bull_spread = BullSpread(70.0, 140.0, 1);
     optimizer.priceAndPrintClassic(model, bull_spread);
 
     BearSpread bear_spread = BearSpread(80.0, 120.0, 1);
@@ -45,6 +45,24 @@ int main()
 
     Butterfly butterfly = Butterfly(80.0, 100.0, 1);
     optimizer.priceAndPrintClassic(model, butterfly);
+
+    optimizer.priceAndPrint(model, call);
+    optimizer.priceAndPrint(model, asian_arithmetic_call);
+
+    Complex test = Complex("Test");
+    test.buyOption(call);
+    call.setMultiplier(-1);
+    test.buyOption(call);
+    test.setMultiplier(2);
+    optimizer.priceAndPrint(model, test);
+
+    BullSpread2 test2 = BullSpread2(70, 140, 1);
+    optimizer.priceAndPrint(model, test2);
+
+    
+
+
+    
 
     return 0;
 
