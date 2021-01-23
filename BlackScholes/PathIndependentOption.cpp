@@ -61,7 +61,5 @@ void PathIndependentOption::print() const
 {
     std::cout << " Strike:          " << K << std::endl;
     std::cout << " Maturity:        " << T << std::endl;
-	if (multiplier != 1.0) {
-        std::cout << " Multiplier :     " << multiplier << std::endl;
-    }
+	std::cout << " Multiplier:      " << multiplier << std::endl;
 }

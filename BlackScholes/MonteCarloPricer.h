@@ -55,15 +55,15 @@ inline PriceCI MonteCarloPricer::price(BlackScholesModel const& model, T const& 
 {
 	model.generatePath(option.getMaturity(), *prices_vector);
 
-	double payoff, payoff_sum=0.0, payoff_sq_mean=0.0;
+	double payoff, payoff_sum=0.0, payoff_sq_sum=0.0;
 	for (int i = 0; i < num_sims; i++) {
 		model.generatePath(option.getMaturity(), *prices_vector);
 		payoff = option.payoff(*prices_vector);
 		payoff_sum += payoff;
-		payoff_sq_mean += payoff * payoff;
+		payoff_sq_sum += payoff * payoff;
 	}
 	double payoff_mean = payoff_sum / static_cast<double>(num_sims);
-	double payoff_std = (payoff_sq_mean / static_cast<double>(num_sims)) - payoff_mean * payoff_mean;
+	double payoff_std = (payoff_sq_sum / static_cast<double>(num_sims)) - payoff_mean * payoff_mean;
 	payoff_mean *= exp(-model.getRiskFreeRate() * option.getMaturity());
 	payoff_std *= exp(-2 * model.getRiskFreeRate() * option.getMaturity());
 	return {payoff_mean, payoff_std, num_sims};
@@ -84,15 +84,15 @@ inline PriceCI MonteCarloPricer::priceComplex(BlackScholesModel const& model, pa
 {
 	model.generatePath(option.getMaturity(), *prices_vector);
 
-    double payoff, payoff_sum=0.0, payoff_sq_mean=0.0;;
+    double payoff, payoff_sum=0.0, payoff_sq_sum=0.0;
 	for (int i = 0; i < num_sims; i++) {
 		model.generatePath(option.getMaturity(), *prices_vector);
 		payoff = option.payoff(*prices_vector);
 		payoff_sum += payoff;
-        payoff_sq_mean += payoff * payoff;
+        payoff_sq_sum += payoff * payoff;
 	}
     double payoff_mean = payoff_sum / static_cast<double>(num_sims);
-    double payoff_std = (payoff_sq_mean / static_cast<double>(num_sims)) - payoff_mean * payoff_mean;
+    double payoff_std = (payoff_sq_sum / static_cast<double>(num_sims)) - payoff_mean * payoff_mean;
     payoff_mean *= exp(-model.getRiskFreeRate() * option.getMaturity());
     payoff_std *= exp(-2 * model.getRiskFreeRate() * option.getMaturity());
     return {payoff_mean, payoff_std, num_sims};
@@ -112,14 +112,14 @@ inline void MonteCarloPricer::priceAndPrintComplex(BlackScholesModel const& mode
 template<typename pathIndependentOption>
 inline PriceCI MonteCarloPricer::priceClassic(BlackScholesModel const& model, pathIndependentOption const& option) const
 {
-    double payoff, payoff_sum=0.0, payoff_sq_mean=0.0;
+    double payoff, payoff_sum=0.0, payoff_sq_sum=0.0;
 	for (int i = 0; i < num_sims; i++) {
 		payoff = option.payoff(model.generatePrice(option.getMaturity()));
         payoff_sum += payoff;
-        payoff_sq_mean += payoff * payoff;
+        payoff_sq_sum += payoff * payoff;
 	}
     double payoff_mean = payoff_sum / static_cast<double>(num_sims);
-    double payoff_std = (payoff_sq_mean / static_cast<double>(num_sims)) - payoff_mean * payoff_mean;
+    double payoff_std = (payoff_sq_sum / static_cast<double>(num_sims)) - payoff_mean * payoff_mean;
     payoff_mean *= exp(-model.getRiskFreeRate() * option.getMaturity());
     payoff_std *= exp(-2 * model.getRiskFreeRate() * option.getMaturity());
     return {payoff_mean, payoff_std, num_sims};

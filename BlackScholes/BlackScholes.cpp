@@ -10,53 +10,56 @@
 
 int main()
 {
-    BlackScholesModel model = BlackScholesModel(100, 0.05, 0.02); // Model to simulate prices
-    MonteCarloPricer optimizer = MonteCarloPricer(1000); // Optimizer 
+    BlackScholesModel model = BlackScholesModel(100, 0.05, 0.2); // Model to simulate prices
+    MonteCarloPricer optimizer = MonteCarloPricer(1e5); // Optimizer
 
-    EuropeanCall call = EuropeanCall(100.0, 1.0); // European Call option
-    EuropeanPut put = EuropeanPut(110.0, 1.0); // European put
-    optimizer.priceAndPrintClassic(model, call);
-    optimizer.priceAndPrintClassic(model, put);
+    EuropeanCall eu_call = EuropeanCall(100.0, 1.0); // European Call
+    optimizer.priceAndPrintClassic(model, eu_call);
+    EuropeanPut eu_put = EuropeanPut(100.0, 1.0); // European Put
+    optimizer.priceAndPrintClassic(model, eu_put);
 
-    DigitalCall digi_call = DigitalCall(100.0, 1.0);
-    DigitalPut digi_put = DigitalPut(100.0, 1.0);
-    optimizer.priceAndPrintClassic(model, digi_call);
-    optimizer.priceAndPrintClassic(model, digi_put);
+    DigitalCall digital_call = DigitalCall(100.0, 1.0); // Digital Call
+    optimizer.priceAndPrintClassic(model, digital_call);
+    DigitalPut digital_put = DigitalPut(100.0, 1.0); // Digital Put
+    optimizer.priceAndPrintClassic(model, digital_put);
 
-    AsianArithmeticCall asian_arithmetic_call = AsianArithmeticCall(100.0, 1.0);
-    AsianArithmeticPut asian_arithmetic_put = AsianArithmeticPut(110.0, 1.0);
+    AsianArithmeticCall asian_arithmetic_call = AsianArithmeticCall(100.0, 1.0); // Asian Arithmetic Call
     optimizer.priceAndPrintComplex(model, asian_arithmetic_call);
+    AsianArithmeticPut asian_arithmetic_put = AsianArithmeticPut(100.0, 1.0); // Asian Arithmetic Put
     optimizer.priceAndPrintComplex(model, asian_arithmetic_put);
 
-    AsianGeometricCall asian_geometric_call = AsianGeometricCall(100.0, 1.0);
-    AsianGeometricPut asian_geometric_put = AsianGeometricPut(110.0, 1.0);
+    AsianGeometricCall asian_geometric_call = AsianGeometricCall(100.0, 1.0); // Asian Geometric Call
     optimizer.priceAndPrintComplex(model, asian_geometric_call);
+    AsianGeometricPut asian_geometric_put = AsianGeometricPut(100.0, 1.0); // Asian Geometric Put
     optimizer.priceAndPrintComplex(model, asian_geometric_put);
 
-    DoubleDigital double_digital = DoubleDigital(80.0, 120.0, 1);
+    DoubleDigital double_digital = DoubleDigital(80.0, 120.0, 1.0); // Double Digital
     optimizer.priceAndPrintClassic(model, double_digital);
 
-    BullSpread bull_spread = BullSpread(70.0, 140.0, 1);
+    BullSpread bull_spread = BullSpread(80.0, 120.0, 1.0); // Bullspread
     optimizer.priceAndPrintClassic(model, bull_spread);
 
-    BearSpread bear_spread = BearSpread(80.0, 120.0, 1);
+    BearSpread bear_spread = BearSpread(80.0, 120.0, 1.0); // BearSpread
     optimizer.priceAndPrintClassic(model, bear_spread);
 
-    Butterfly butterfly = Butterfly(80.0, 100.0, 1);
+    Butterfly butterfly = Butterfly(80.0, 120.0, 1.0); //Butterfly
     optimizer.priceAndPrintClassic(model, butterfly);
 
-    optimizer.priceAndPrint(model, call);
-    optimizer.priceAndPrint(model, asian_arithmetic_call);
 
-    Complex test = Complex("Test");
-    test.buyOption(call);
-    call.setMultiplier(-1);
-    test.buyOption(call);
-    test.setMultiplier(2);
-    optimizer.priceAndPrint(model, test);
+    Complex custom_option = Complex("Customized option");
+    /* The repartition of this customized option :
+     - 25% Long European Call
+     - 25% Long Asian Arithmetic Put
+     - 50% Short Double Digital
 
-    BullSpread2 test2 = BullSpread2(70, 140, 1);
-    optimizer.priceAndPrint(model, test2);
+     Total number of Options purchased: 200 000 */
+
+    custom_option.buyOption(eu_call, 0.25);  // Buy European Call
+    custom_option.buyOption(asian_arithmetic_put, 0.25); // Buy 3 Asian Arithmetic Put
+    custom_option.buyOption(digital_put, -0.5); // Sell Double digital Option
+
+    custom_option.setMultiplier(200000.0); // Set the total number of options
+    optimizer.priceAndPrint(model, custom_option);
 
     return 0;
 
