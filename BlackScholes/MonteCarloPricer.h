@@ -4,7 +4,10 @@
 #include <iostream>
 #include <cmath>
 #include "Price_CI.h"
-
+/*
+Methods price, priceComplex and priceClassic now return Price_CI objects to allow
+to display confidence intervals as well as the price estimate.
+ */
 class MonteCarloPricer
 {
 public:
