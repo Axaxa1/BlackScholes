@@ -1,5 +1,6 @@
 #include "Asian.h"
 #include <iostream>
+#include <cmath>
 
 AsianArithmeticCall::AsianArithmeticCall()
 {
