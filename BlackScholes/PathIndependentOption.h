@@ -14,6 +14,7 @@ public:
 	double getMaturity() const;
 	double getMultiplier() const;
 
+
 	virtual double payoff(double const& S) const;
 	virtual double payoff(std::vector<double> prices_vector) const;
 	virtual ~PathIndependentOption();

@@ -1,6 +1,3 @@
-// BlackScholes.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
-//
-
 #include "BlackScholesModel.h"
 #include "MonteCarloPricer.h"
 #include "European.h"
@@ -10,8 +7,14 @@
 
 int main()
 {
-    BlackScholesModel model = BlackScholesModel(100, 0.05, 0.2); // Model to simulate prices
-    MonteCarloPricer optimizer = MonteCarloPricer(1e5); // Optimizer
+    double starting_price = 100.0;
+    double risk_free_rate = 0.05;
+    double volatility = 0.2;
+    BlackScholesModel model = BlackScholesModel(starting_price, risk_free_rate, volatility); // Model to simulate prices
+    
+    int num_sims = 10000;
+    int n_steps = 250; // Number of steps in the path generation process
+    MonteCarloPricer optimizer = MonteCarloPricer(num_sims, n_steps); // Optimizer
 
     EuropeanCall eu_call = EuropeanCall(100.0, 1.0); // European Call
     optimizer.priceAndPrintClassic(model, eu_call);
@@ -24,14 +27,14 @@ int main()
     optimizer.priceAndPrintClassic(model, digital_put);
 
     AsianArithmeticCall asian_arithmetic_call = AsianArithmeticCall(100.0, 1.0); // Asian Arithmetic Call
-    optimizer.priceAndPrintComplex(model, asian_arithmetic_call);
+    optimizer.priceAndPrint(model, asian_arithmetic_call);
     AsianArithmeticPut asian_arithmetic_put = AsianArithmeticPut(100.0, 1.0); // Asian Arithmetic Put
-    optimizer.priceAndPrintComplex(model, asian_arithmetic_put);
+    optimizer.priceAndPrint(model, asian_arithmetic_put);
 
     AsianGeometricCall asian_geometric_call = AsianGeometricCall(100.0, 1.0); // Asian Geometric Call
-    optimizer.priceAndPrintComplex(model, asian_geometric_call);
+    optimizer.priceAndPrint(model, asian_geometric_call);
     AsianGeometricPut asian_geometric_put = AsianGeometricPut(100.0, 1.0); // Asian Geometric Put
-    optimizer.priceAndPrintComplex(model, asian_geometric_put);
+    optimizer.priceAndPrint(model, asian_geometric_put);
 
     DoubleDigital double_digital = DoubleDigital(80.0, 120.0, 1.0); // Double Digital
     optimizer.priceAndPrintClassic(model, double_digital);
@@ -48,18 +51,20 @@ int main()
 
     Complex custom_option = Complex("Customized option");
     /* The repartition of this customized option :
-     - 25% Long European Call
-     - 25% Long Asian Arithmetic Put
-     - 50% Short Double Digital
-     Total number of Options purchased: 200 000 */
+     - 1 Long European Call
+     - 1 Long Asian Arithmetic Put
+     - 3 Short Digital Call
+     Total number of Options purchased: 50 000 */
 
-    custom_option.buyOption(eu_call, 0.25);  // Buy European Call
-    custom_option.buyOption(asian_arithmetic_put, 0.25); // Buy 3 Asian Arithmetic Put
-    custom_option.buyOption(digital_put, -0.5); // Sell Double digital Option
+    DigitalCall triple_digital_call(120, 1); // Create a triple digitalCall
+    triple_digital_call.setMultiplier(3);
+    
+    custom_option += eu_call ; // Buy European Call
+    custom_option += asian_arithmetic_put; // Buy Asian Arithmetic Put
+    custom_option -= triple_digital_call; // Sell triple digital Call
 
-    custom_option.setMultiplier(200000.0); // Set the total number of options
+    custom_option *= 50000.0; // Set the total number of options
     optimizer.priceAndPrint(model, custom_option);
 
     return 0;
-
 }

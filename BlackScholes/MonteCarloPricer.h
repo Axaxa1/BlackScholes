@@ -1,13 +1,14 @@
 #pragma once
 #include "BlackScholesModel.h"
 #include "Asian.h"
+#include "PriceCI.h"
 #include <iostream>
 #include <cmath>
-#include "PriceCI.h"
 /*
-Methods price, priceComplex and priceClassic now return Price_CI objects to allow
+Methods price, priceComplex and priceClassic now return PriceCI objects
 to display confidence intervals as well as the price estimate.
  */
+
 class MonteCarloPricer
 {
 public:
@@ -35,7 +36,6 @@ public:
 
 	~MonteCarloPricer();
 	
-
 private:
 	int num_sims;
 	int n_steps;
@@ -68,6 +68,8 @@ inline void MonteCarloPricer::priceAndPrint(BlackScholesModel const& model, T co
 {
 	model.print();
 	option.print();
+	std::cout << " Number of paths: " << num_sims << std::endl;
+	std::cout << " Number of steps: " << n_steps << std::endl;
 	price(model, option).print_CI();
 }
 
@@ -91,7 +93,9 @@ inline PriceCI MonteCarloPricer::priceClassic(BlackScholesModel const& model, pa
 template<typename pathIndependentOption>
 inline void MonteCarloPricer::priceAndPrintClassic(BlackScholesModel const& model, pathIndependentOption const& option) const
 {
+	std::cout << std::endl;
 	model.print();
 	option.print();
+	std::cout << " Number of paths: " << num_sims << std::endl;
 	priceClassic(model, option).print_CI();
 }
