@@ -22,10 +22,25 @@ int main()
     EuropeanPut eu_put = EuropeanPut(100.0, T); // European Put
     optimizer.priceAndPrintClassic(model, eu_put);
 
+    BullSpread bull_spread = BullSpread(100.0, 120.0, T); // Bullspread
+    optimizer.priceAndPrintClassic(model, bull_spread);
+
+    BearSpread bear_spread = BearSpread(80.0, 100.0, T); // BearSpread
+    optimizer.priceAndPrintClassic(model, bear_spread);
+
+    Butterfly butterfly = Butterfly(100.0, 120.0, T); // Butterfly
+    optimizer.priceAndPrintClassic(model, butterfly);
+
+    Strangle strangle = Strangle(100.0, 120.0, T); //Strangle
+    optimizer.priceAndPrintClassic(model, strangle);
+
     DigitalCall digital_call = DigitalCall(100.0, T); // Digital Call
     optimizer.priceAndPrintClassic(model, digital_call);
     DigitalPut digital_put = DigitalPut(100.0, T); // Digital Put
     optimizer.priceAndPrintClassic(model, digital_put);
+
+    DoubleDigital double_digital = DoubleDigital(100.0, 120.0, T); // Double Digital
+    optimizer.priceAndPrintClassic(model, double_digital);
 
     AsianArithmeticCall asian_arithmetic_call = AsianArithmeticCall(100.0, T); // Asian Arithmetic Call
     optimizer.priceAndPrint(model, asian_arithmetic_call);
@@ -36,21 +51,6 @@ int main()
     optimizer.priceAndPrint(model, asian_geometric_call);
     AsianGeometricPut asian_geometric_put = AsianGeometricPut(100.0, T); // Asian Geometric Put
     optimizer.priceAndPrint(model, asian_geometric_put);
-
-    DoubleDigital double_digital = DoubleDigital(80.0, 120.0, T); // Double Digital
-    optimizer.priceAndPrintClassic(model, double_digital);
-
-    BullSpread bull_spread = BullSpread(80.0, 120.0, T); // Bullspread
-    optimizer.priceAndPrintClassic(model, bull_spread);
-
-    BearSpread bear_spread = BearSpread(80.0, 120.0, T); // BearSpread
-    optimizer.priceAndPrintClassic(model, bear_spread);
-
-    Butterfly butterfly = Butterfly(80.0, 120.0, T); // Butterfly
-    optimizer.priceAndPrintClassic(model, butterfly);
-
-    Strangle strangle = Strangle(80.0, 120.0, T); //Strangle
-    optimizer.priceAndPrintClassic(model, strangle);
 
     Complex custom_option = Complex("Customized option");
     /* The repartition of this customized option :
@@ -68,6 +68,26 @@ int main()
 
     custom_option *= 50000.0; // Set the total number of options
     optimizer.priceAndPrint(model, custom_option);
+
+    /* If you want to test if our class Complex option is correct, you can compare the value of the
+     the direct computation of bullspread, bearspread, strangle and butterfly with the following command :
+
+    // Bullspread = Buy Call K1 and Sell Call K2 (k1 < K2)
+    BullSpreadComplex bull_spread_complex = BullSpreadComplex(100.0, 120.0, T);
+    optimizer.priceAndPrint(model, bull_spread_complex);
+
+    // Bearspread = Sell Call K1 and Buy Call K2 (k1 < K2)
+    BearSpreadComplex bear_spread_complex = BearSpreadComplex(100.0, 120.0, T);
+    optimizer.priceAndPrint(model, bear_spread_complex);
+
+    // Strangle = Buy Put K1 and Buy Call K2 (K1 < K2)
+    StrangleComplex strangle_complex = StrangleComplex(100.0, 120.0, T);
+    optimizer.priceAndPrint(model, strangle_complex);
+
+    // Butterfly = Buy Call K1, Buy Call K2 and Sell 2 Call (K1 + K2)/2 (K1 < K2)
+    ButterflyComplex butterfly_complex = ButterflyComplex(100.0, 120.0, T);
+    optimizer.priceAndPrint(model, butterfly_complex);
+     */
 
     return 0;
 }

@@ -116,7 +116,7 @@ public:
 	BullSpreadComplex(double const& K1, double const& K2, double const& T) {
 		this->setName("BullSpread");
 		this->buyOption(EuropeanCall(K1, T));
-		this->buyOption(EuropeanCall(K2, T), -1);
+		this->buyOption(EuropeanCall(K2, T), -1.0);
 	}
 	~BullSpreadComplex() {}
 };
@@ -126,8 +126,8 @@ class BearSpreadComplex : public Complex
 public:
 	BearSpreadComplex(double const& K1, double const& K2, double const& T) {
 		this->setName("BearSpread");
-		this->buyOption(EuropeanCall(K1, T), -1);
-		this->buyOption(EuropeanPut(K2, T));
+		this->buyOption(EuropeanCall(K1, T), -1.0);
+		this->buyOption(EuropeanCall(K2, T));
 	}
 	~BearSpreadComplex() {}
 };
@@ -149,7 +149,7 @@ public:
 	ButterflyComplex(double const& K1, double const& K2, double const& T) {
 		this->setName("Butterfly");
 		this->buyOption(EuropeanCall(K1, T));
-		this->buyOption(EuropeanPut((K1 + K2) / 2, T), 2);
+		this->buyOption(EuropeanCall((K1 + K2) / 2.0, T), -2.0);
 		this->buyOption(EuropeanCall(K2, T));
 	}
 	~ButterflyComplex() {}
