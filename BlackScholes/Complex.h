@@ -1,10 +1,10 @@
 #pragma once
-#include <vector>
 #include "European.h"
 #include "Asian.h"
 #include "Digital.h"
 #include <string>
 #include <iostream>
+#include <vector>
 
 class Complex
 {
