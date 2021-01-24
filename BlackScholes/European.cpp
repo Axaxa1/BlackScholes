@@ -4,8 +4,8 @@
 
 EuropeanCall::EuropeanCall()
 {
-	this->setStrike(100);
-	this->setMaturity(1);
+	this->setStrike(100.0);
+	this->setMaturity(1.0);
 }
 
 EuropeanCall::EuropeanCall(double const& K, double const& T)
@@ -38,8 +38,8 @@ EuropeanCall::~EuropeanCall()
 
 EuropeanPut::EuropeanPut()
 {
-	this->setStrike(100);
-	this->setMaturity(1);
+	this->setStrike(100.0);
+	this->setMaturity(1.0);
 }
 
 EuropeanPut::EuropeanPut(double const& K, double const& T)
@@ -72,9 +72,9 @@ EuropeanPut::~EuropeanPut()
 
 BullSpread::BullSpread()
 {
-	this->K1 = 90;
-	this->K2 = 110;
-	this->setMaturity(1);
+	this->K1 = 90.0;
+	this->K2 = 110.0;
+	this->setMaturity(1.0);
 }
 BullSpread::BullSpread(double const& K1, double const& K2, double const& T)
 {
@@ -111,9 +111,9 @@ BullSpread::~BullSpread()
 
 BearSpread::BearSpread()
 {
-	this->K1 = 90;
-	this->K2 = 110;
-	this->setMaturity(1);
+	this->K1 = 90.0;
+	this->K2 = 110.0;
+	this->setMaturity(1.0);
 }
 BearSpread::BearSpread(double const& K1, double const& K2, double const& T)
 {
@@ -150,9 +150,9 @@ BearSpread::~BearSpread()
 
 Strangle::Strangle()
 {
-	this->K1 = 90;
-	this->K2 = 110;
-	this->setMaturity(1);
+	this->K1 = 90.0;
+	this->K2 = 110.0;
+	this->setMaturity(1.0);
 }
 Strangle::Strangle(double const& K1, double const& K2, double const& T)
 {
@@ -189,9 +189,9 @@ Strangle::~Strangle()
 
 Butterfly::Butterfly()
 {
-	this->K1 = 90;
-	this->K2 = 110;
-	this->setMaturity(1);
+	this->K1 = 90.0;
+	this->K2 = 110.0;
+	this->setMaturity(1.0);
 }
 Butterfly::Butterfly(double const& K1, double const& K2, double const& T)
 {
@@ -202,9 +202,9 @@ Butterfly::Butterfly(double const& K1, double const& K2, double const& T)
 
 double Butterfly::payoff(double const& S) const
 {
-	if (K1 < S && S < (K1+K2)/2)
+	if (K1 < S && S < (K1+K2)/2.0)
 		return (S - K1) * getMultiplier();
-	else if ((K1+K2)/2 < S && S < K2)
+	else if ((K1+K2)/2.0 < S && S < K2)
 		return (K2 - S) * getMultiplier();
 	return 0.0;
 }

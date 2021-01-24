@@ -56,8 +56,8 @@ int main()
      - 3 Short Digital Call
      Total number of Options purchased: 50 000 */
 
-    DigitalCall triple_digital_call(120, 1); // Create a triple digitalCall
-    triple_digital_call.setMultiplier(3);
+    DigitalCall triple_digital_call(120.0, 1.0); // Create a triple digitalCall
+    triple_digital_call.setMultiplier(3.0);
     
     custom_option += eu_call ; // Buy European Call
     custom_option += asian_arithmetic_put; // Buy Asian Arithmetic Put

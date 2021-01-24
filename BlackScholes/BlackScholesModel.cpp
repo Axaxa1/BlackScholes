@@ -12,7 +12,7 @@ BlackScholesModel::BlackScholesModel()
 {
     this->S = 100;
     this->r = 0.05;
-    this->v = 0.02;
+    this->v = 0.2;
 }
 
 BlackScholesModel::BlackScholesModel(double const& S, double const& r, double const& v)
@@ -60,17 +60,17 @@ double BlackScholesModel::getVolatility() const
 
 void BlackScholesModel::print() const
 {
-    std::cout << "-- Black Scholes Model --" << std::endl;
-    std::cout << " Starting price : " << S << std::endl;
-    std::cout << " Risk Free Rate : " << r << std::endl;
-    std::cout << " Volatility : " << v << std::endl;
+    std::cout << "--- Black Scholes Model ---" << std::endl;
+    std::cout << " Starting price:  " << S << std::endl;
+    std::cout << " Risk Free Rate:  " << r << std::endl;
+    std::cout << " Volatility:      " << v << std::endl;
 }
 
 double BlackScholesModel::gaussian_box_muller()
 {
     double x;
     double y;
-    double euclid_sq=0.0;
+    double euclid_sq;
 
     // Continue generating two uniform random variables
     // until the square of their "euclidean distance"

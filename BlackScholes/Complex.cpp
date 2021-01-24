@@ -2,14 +2,14 @@
 
 Complex::Complex()
 {
-	max_T = 0;
+	max_T = 0.0;
+    name = "Complex Option";
 }
 
 Complex::Complex(std::string const& name)
 {
-	max_T = 0;
+	max_T = 0.0;
 	this->name = name;
-    max_T = 0;
 }
 
 void Complex::buyOption(EuropeanCall const& option)
