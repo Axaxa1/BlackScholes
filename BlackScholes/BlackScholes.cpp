@@ -14,7 +14,7 @@ int main()
 
     double T = 10.0; // Maturity
     int num_sims = 10000;
-    int n_steps = 20; // Number of steps in the path generation process
+    int n_steps = 250; // Number of steps in the path generation process
     MonteCarloPricer optimizer(num_sims, n_steps); // Optimizer
 
     EuropeanCall eu_call(100.0, T); // European Call
@@ -84,5 +84,5 @@ int main()
     ButterflyComplex butterfly_complex(100.0, 120.0, T);
     optimizer.priceAndPrint(model, butterfly_complex);
      */
-    std::cout << optimizer.omega(model, eu_call);
+
 }

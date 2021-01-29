@@ -23,9 +23,6 @@ public:
 	int getNumSteps() const;
 	void showPrices() const;
 
-	template<typename T>
-	double omega(BlackScholesModel const& model, T const& option);
-
 	// Price any option 
 	template<typename T>
 	PriceCI price(BlackScholesModel const& model, T const& option);
@@ -46,20 +43,6 @@ private:
 	std::vector<double>* prices_vector;
 
 };
-
-template<typename T>
-inline double MonteCarloPricer::omega(BlackScholesModel const& model, T const& option)
-{
-	T test(option);
-	double h = 0.1;
-	test.setMaturity(option.getMaturity() + h);
-	double p1 = price(model, test).getPrice();
-	test.setMaturity(option.getMaturity() - h);
-	double p2 = price(model, test).getPrice();
-
-	return (p1 - p2) / h;
-
-}
 
 // Price Any Option
 template<typename T>
